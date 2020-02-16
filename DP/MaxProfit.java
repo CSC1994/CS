@@ -164,16 +164,14 @@ public class MaxProfit {
 
         int[][][] dp = new int[n][max_k + 1][2];
         for (int i = 0; i < n; i++) {
-            dp[i][0][0]=0;
+//            dp[i][0][0]=0;
             dp[i][0][1]=Integer.MIN_VALUE;
         }
-        for (int i = 0; i < n; i++) {
-            for (int k = max_k; k >= 1; k--) {
-                if (i - 1 == -1) {
-                    dp[i][k][0]=0;
-                    dp[i][k][1]=Integer.MIN_VALUE;
-                    continue;
-                }
+        for (int i = 0; i <= max_k; i++) {
+            dp[0][i][1]=Integer.MIN_VALUE;
+        }
+        for (int i = 1; i < n; i++) {
+            for (int k = 1; k <= max_k; k++) {
                 dp[i][k][0] = Math.max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i]);
                 dp[i][k][1] = Math.max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i]);
             }
